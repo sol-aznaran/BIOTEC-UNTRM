@@ -1,0 +1,113 @@
+======================== Welcome to MVP =========================
+    an R package for Memory-efficient, Visualization-enhanced    
+     and Parallel-accelerated genome-wide association study      
+                      __  __  __   __  ___                       
+                     |  \/  | \ \ / / | _ \                      
+                     | |\/| |  \ V /  |  _/                      
+                     |_|  |_|   \_/   |_|        Version: 1.4.5  
+  Design & Maintain: Lilin Yin, Haohao Zhang, and Xiaolei Liu    
+  Contributors: Zhenshuang Tang, Jingya Xu, Dong Yin, Zhiwu      
+  Zhang, Xiaohui Yuan, Mengjin Zhu, Shuhong Zhao, Xinyun Li      
+  Mailto: xiaoleiliu@mail.hzau.edu.cn, ylilin@mail.hzau.edu.cn   
+=================================================================
+Start: 2025-09-09 21:57:10 -05 
+The log has been output to the file: RiceDiversity/mvp/gwas/MVP.20250909_215710.log 
+Input data has 413 individuals and 36901 markers 
+Markers are detected to be stored by column 
+Analyzed trait: Amylose.content 
+Number of threads used: 25.6 
+No high performance math library detected! The computational efficiency would be greatly reduced
+Total 12 individuals are removed due to missings 
+Calculate allele frequency... 
+Eigen Decomposition on GRM 
+-------------------------GWAS Start------------------------- 
+General Linear Model (GLM) Start... 
+scanning...
+Genomic inflation factor (lambda): 98.8316 
+Writing results to local file 
+Mixed Linear Model (MLM) Start... 
+Variance components using: BRENT 
+Estimated Vg and Ve: 33.180919 3.965519 
+scanning...
+Genomic inflation factor (lambda): 0.6881 
+Writing results to local file 
+FarmCPU Start... 
+Current loop: 1 out of maximum of 10 
+seqQTN: 
+NULL 
+number of covariates in current loop is: 
+0 
+scanning... 
+Current loop: 2 out of maximum of 10 
+Optimizing Pseudo QTNs... 
+seqQTN: 
+20640 8540 28324 
+number of covariates in current loop is: 
+3 
+scanning... 
+Current loop: 3 out of maximum of 10 
+Optimizing Pseudo QTNs... 
+seqQTN: 
+20640 8540 10180 28324 447 22595 8962 3148 18179 7256 
+number of covariates in current loop is: 
+10 
+scanning... 
+Current loop: 4 out of maximum of 10 
+Optimizing Pseudo QTNs... 
+seqQTN: 
+20640 28324 8540 10180 10870 12258 17185 34579 3269 24911 18179 447 22595 8962 7256 
+number of covariates in current loop is: 
+15 
+scanning... 
+Current loop: 5 out of maximum of 10 
+Optimizing Pseudo QTNs... 
+seqQTN: 
+20640 8540 10180 28324 3148 447 35350 36035 33080 3084 18179 10870 8962 17185 22595 34579 7256 12258 24911 
+number of covariates in current loop is: 
+19 
+scanning... 
+Current loop: 6 out of maximum of 10 
+Optimizing Pseudo QTNs... 
+seqQTN: 
+20640 28324 8540 447 10180 18179 24911 34579 10870 36035 35350 3148 17185 7256 33080 12258 8962 22595 3084 
+number of covariates in current loop is: 
+19 
+scanning... 
+Genomic inflation factor (lambda): 1.1258 
+Writing results to local file 
+Significant level: 1.35e-06 
+---------------------Visualization Start-------------------- 
+Phenotype distribution Plotting 
+SNP_Density Plotting 
+Circular_Manhattan Plotting Amylose.content.GLM 
+Circular_Manhattan Plotting Amylose.content.MLM 
+Circular_Manhattan Plotting Amylose.content.FarmCPU 
+Rectangular_Manhattan Plotting Amylose.content.GLM 
+Rectangular_Manhattan Plotting Amylose.content.MLM 
+Rectangular_Manhattan Plotting Amylose.content.FarmCPU 
+Q_Q Plotting Amylose.content.GLM 
+Q_Q Plotting Amylose.content.MLM 
+Q_Q Plotting Amylose.content.FarmCPU 
+Multracks_Rectangular Plotting Amylose.content.GLM 
+Multracks_Rectangular Plotting Amylose.content.MLM 
+Multracks_Rectangular Plotting Amylose.content.FarmCPU 
+Multracks_QQ Plotting Amylose.content.GLM 
+Multracks_QQ Plotting Amylose.content.MLM 
+Multracks_QQ Plotting Amylose.content.FarmCPU 
+Multraits_QQ Plotting Amylose.content.GLM 
+Multraits_QQ Plotting Amylose.content.MLM 
+Multraits_QQ Plotting Amylose.content.FarmCPU 
+Results are stored at Working Directory: RiceDiversity/mvp/gwas 
+End: 2025-09-09 21:57:37 -05 
+Total running time: 27s 
+===================== MVP ACCOMPLISHED ===================== 
+SNP_Density Plotting 
+Multracks_Rectangular Plotting Amylose.content.GLM 
+Multracks_Rectangular Plotting Amylose.content.MLM 
+Multracks_Rectangular Plotting Amylose.content.FarmCPU 
+Multracks_QQ Plotting Amylose.content.GLM 
+Multracks_QQ Plotting Amylose.content.MLM 
+Multracks_QQ Plotting Amylose.content.FarmCPU 
+Multraits_QQ Plotting Amylose.content.GLM 
+Multraits_QQ Plotting Amylose.content.MLM 
+Multraits_QQ Plotting Amylose.content.FarmCPU 

@@ -1,0 +1,204 @@
+--- 
+title: "Tarea: Coding-01"
+author: "Solange Aznarán"
+format:
+  html:
+    toc: true
+    toc-location: left
+    number-sections: true
+    self-contained: true
+editor_options: 
+  chunk_output_type: console
+execute:
+  echo: false
+  warning: false
+---
+
+```{r}
+#| label: setup
+#| include: false
+
+source("https://inkaverse.com/docs.r")
+knitr::opts_chunk$set(echo = T)
+
+cran <- c("inti"
+          , "metan"
+          , "psych"
+          , "FactoMineR"
+          , "openxlsx"
+          , "cowplot"
+          )
+
+suppressPackageStartupMessages({
+  for (pkgs in cran) { 
+    if( !require(pkgs, character.only = T) ) {
+      install.packages(pkgs)
+      library(pkgs, character.only = T)
+    } 
+  }
+remove(cran, pkgs)
+})
+```
+
+# Base de datos
+
+```{r}
+bd <- read.csv("BeansData.csv", header=TRUE, sep= ";")
+
+#bd %>% web_table()
+```
+
+- Revisar estructura de los datos
+
+```{r}
+str(bd)
+```
+
+- Estructura correcta
+
+
+# Correlación de variables
+
+```{r}
+# browseURL("https://wilkelab.org/cowplot/articles/mixing_plot_frameworks.html")
+
+png(filename = "correlation_Cod01.png", width = 25, height = 25, units = "cm", res = 300)
+bd %>%
+  select(where(is.numeric))  %>% 
+  pairs.panels(hist.col="red"
+               , pch = 21
+               , method = "pearson"
+               , stars = T
+               , scale = T
+               , lm = T
+               ) 
+graphics.off()
+
+include_graphics("correlation_Cod01.png")
+```
+
+- ¿Qué variables muestran correlaciones interesantes?
+Days to Flowering con Days to Maturity tienen una correlación positiva
+Days to Maturity con Pods per plant tienen una correlación negativa
+
+# Análisis multivariado
+
+```{r}
+mv.bd <- bd %>% 
+  group_by(Genotype) %>% 
+  summarise(across(where(is.numeric)
+                   , ~ mean(.x, na.rm = TRUE))) %>%
+  column_to_rownames("Genotype") %>% 
+  PCA(X = .
+      , scale.unit = T
+      , graph = F
+          )
+```
+
+## Análisis de las variables
+
+```{r}
+plot.cod01 <- plot.PCA(mv.bd
+                , choix = "var")
+
+plot.cod01
+```
+
+- ¿Qué variables estan correlacionadas?
+DTF y DTM están positivamente correlacionadas. Days to Maturity y Yield tienen una correlación negativa.
+
+## Análisis de los individuos
+
+```{r}
+plot2.cod01 <- plot.PCA(mv.bd
+         , choix = "ind"
+         , cex = 0.8
+         , shadowtext = T
+         , label = "ind"
+         , autoLab = "yes"
+         , graph.type = "ggplot"
+         )
+
+plot2.cod01
+```
+
+- ¿Cuáles de los híbridos tuvieron mejores rendimientos?
+DAB 237, DAB396 y DAB 292
+
+```{r}
+list(plot.cod01, plot2.cod01) %>% 
+  plot_grid(plotlist = .
+            , nrow = 1
+            , labels = "AUTO"
+            , rel_widths = c(1, 1.5)
+            )
+```
+
+# Heredabilidad
+
+## Rendimiento
+
+```{r}
+hr.bd <- H2cal(data = bd
+            , trait = "YLD"
+            , gen.name = "Genotype"
+            , rep.n = 2
+            , env.name = "Trial"
+            , env.n = 3
+            , fixed.model = "0 + (1|Rep) + (1|Trial) + Genotype"
+            , random.model = "1 + (1|Rep) + (1|Trial) + (1|Genotype)"
+            , emmeans = TRUE
+            , plot_diag = TRUE
+            , outliers.rm = FALSE
+            )
+```
+
+### Componentes de la variancia
+
+```{r}
+hr.bd$model %>% summary()
+
+hr.bd$tabsmr %>% web_table()
+```
+
+### BLUPs
+
+```{r}
+hr.bd$blups %>%
+  arrange(desc(YLD)) %>% 
+  kable()
+```
+
+## Pods per plant
+
+```{r}
+hr.ppp <- H2cal(data = bd
+            , trait = "PPP"
+            , gen.name = "Genotype"
+            , rep.n = 2
+            , env.name = "Trial"
+            , env.n = 3
+            , fixed.model = "0 + (1|Rep) + (1|Trial)  + Genotype"
+            , random.model = "1 + (1|Rep) + (1|Trial) + (1|Genotype)"
+            , emmeans = TRUE
+            , plot_diag = TRUE
+            , outliers.rm = TRUE
+            )
+```
+
+### Componentes de la variancia
+
+```{r}
+hr.ppp$model %>% summary()
+
+hr.ppp$tabsmr %>% web_table()
+```
+
+### BLUPs
+
+```{r}
+hr.ppp$blups %>% 
+  arrange(desc(PPP))
+  kable()
+```
+

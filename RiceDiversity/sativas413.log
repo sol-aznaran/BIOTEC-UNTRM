@@ -1,0 +1,31 @@
+PLINK v2.0.0-a.6.25 AVX2 (19 Oct 2025)
+Options in effect:
+  --export vcf
+  --map RiceDiversity/sativas413.map
+  --out RiceDiversity/sativas413
+  --ped RiceDiversity/sativas413.ped
+
+Hostname: SAMEWINNIE
+Working directory: D:\Trabajos en Github\BIOTEC-UNTRM
+Start time: Fri Oct 24 20:01:34 2025
+
+Random number seed: 1761354094
+7103 MiB RAM detected; reserving 3551 MiB for main workspace.
+Using up to 8 compute threads.
+--pedmap: 36901 variants in .map file.
+--pedmap: 413 samples present, genotypes extracted to
+RiceDiversity/sativas413-temporary.bed.smaj .
+Transposing sample-major .bed to RiceDiversity/sativas413-temporary.pgen , and
+setting major alleles to provisional-REF.
+Transpose complete.
+--pedmap: RiceDiversity/sativas413-temporary.pgen +
+RiceDiversity/sativas413-temporary.pvar +
+RiceDiversity/sativas413-temporary.psam written. .bed.smaj and .fam.tmp
+temporary files deleted.
+413 samples (0 females, 0 males, 413 ambiguous; 413 founders) loaded from
+RiceDiversity/sativas413-temporary.psam.
+36901 variants loaded from RiceDiversity/sativas413-temporary.pvar.
+Note: No phenotype data present.
+--export vcf to RiceDiversity/sativas413.vcf ... done.
+
+End time: Fri Oct 24 20:01:35 2025
